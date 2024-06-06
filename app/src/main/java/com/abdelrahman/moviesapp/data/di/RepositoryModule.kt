@@ -1,24 +1,18 @@
 package com.abdelrahman.moviesapp.data.di
 
 
-import com.abdelrahman.moviesapp.data.data_sources.RemoteDataSource
-import com.abdelrahman.moviesapp.data.repositories.RepositoryImpl
-import com.abdelrahman.moviesapp.domain.repositories.Repository
+import com.abdelrahman.moviesapp.data.repositories.MoviesRepositoryImpl
+import com.abdelrahman.moviesapp.domain.repositories.MoviesRepository
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RepositoryModule {
-    @Provides
-    @Singleton
-    fun provideNewsRepository(
-        remoteDataSource: RemoteDataSource,
-    ): Repository {
-        return RepositoryImpl(remoteDataSource)
-    }
+abstract class RepositoryModule {
+    @Binds
+    abstract fun bindMovieRepository(repository: MoviesRepositoryImpl): MoviesRepository
+
 
 }

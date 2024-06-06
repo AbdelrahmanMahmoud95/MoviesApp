@@ -14,9 +14,9 @@
         android:name=".presentation.MainApplication"
         android:fullBackupContent="false"
         android:hasFragileUserData="false"
-        android:usesCleartextTraffic="false"
+        android:usesCleartextTraffic="true"
         android:taskAffinity=""
-        android:theme="@style/Theme.AbdelrahmanPaymob"
+        android:theme="@style/Theme.Movies"
         tools:targetApi="31">
 
         <activity
