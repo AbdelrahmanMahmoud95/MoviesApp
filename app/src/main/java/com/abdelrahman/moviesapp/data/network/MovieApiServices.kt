@@ -4,9 +4,8 @@ import com.abdelrahman.moviesapp.data.models.MoviesResponse
 import com.abdelrahman.moviesapp.data.models.Results
 import retrofit2.http.GET
 import retrofit2.http.Path
-import retrofit2.http.Query
 
-interface ApiServices {
+interface MovieApiServices {
     @GET("3/movie/now_playing")
     suspend fun getNowPlayingMovies(): MoviesResponse
 

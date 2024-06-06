@@ -5,7 +5,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.NetworkInfo
 import android.os.Build
-import com.abdelrahman.moviesapp.data.network.ApiServices
+import com.abdelrahman.moviesapp.data.network.MovieApiServices
 import com.abdelrahman.moviesapp.utils.Constants
 import dagger.Module
 import dagger.Provides
@@ -106,7 +106,7 @@ object NetWorkModule {
 
     @Singleton
     @Provides
-    fun provideApiServices(retrofit: Retrofit): ApiServices {
-        return retrofit.create(ApiServices::class.java)
+    fun provideApiServices(retrofit: Retrofit): MovieApiServices {
+        return retrofit.create(MovieApiServices::class.java)
     }
 }

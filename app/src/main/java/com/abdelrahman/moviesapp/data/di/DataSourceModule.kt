@@ -3,7 +3,7 @@ package com.abdelrahman.moviesapp.data.di
 
 import com.abdelrahman.moviesapp.data.data_sources.RemoteDataSource
 import com.abdelrahman.moviesapp.data.data_sources.RemoteDataSourceImpl
-import com.abdelrahman.moviesapp.data.network.ApiServices
+import com.abdelrahman.moviesapp.data.network.MovieApiServices
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,7 +16,7 @@ object DataSourceModule {
     @Provides
     @Singleton
     fun provideNewsRemoteDataSource(
-        apiServices: ApiServices
+        apiServices: MovieApiServices
     ): RemoteDataSource {
         return RemoteDataSourceImpl(apiServices)
     }
