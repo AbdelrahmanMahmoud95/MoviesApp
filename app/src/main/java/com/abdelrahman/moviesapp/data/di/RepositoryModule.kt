@@ -3,6 +3,7 @@ package com.abdelrahman.moviesapp.data.di
 
 import com.abdelrahman.moviesapp.data.data_sources.RemoteDataSource
 import com.abdelrahman.moviesapp.data.repositories.RepositoryImpl
+import com.abdelrahman.moviesapp.domain.repositories.Repository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,6 +1,6 @@
 package com.abdelrahman.moviesapp.data.di
 
-import com.abdelrahman.paymob.base.data.network.ApiServices
+import com.abdelrahman.moviesapp.data.network.ApiServices
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +15,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class NetWorkModule {
-
 
     @Singleton
     @Provides
