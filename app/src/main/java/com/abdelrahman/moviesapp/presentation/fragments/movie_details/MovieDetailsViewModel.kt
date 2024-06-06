@@ -1,4 +1,4 @@
-package com.abdelrahman.moviesapp.presentation.fragments.movies
+package com.abdelrahman.moviesapp.presentation.fragments.movie_details
 
 import androidx.lifecycle.viewModelScope
 import com.abdelrahman.moviesapp.data.models.Results
@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MoviesViewModel @Inject constructor(
+class MovieDetailsViewModel @Inject constructor(
     private val getMoviesListUseCase: GetMoviesListUseCase
 ) : BaseViewModel() {
 

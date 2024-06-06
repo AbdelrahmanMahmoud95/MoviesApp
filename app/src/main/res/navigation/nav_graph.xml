@@ -13,5 +13,13 @@
 
     </fragment>
 
+    <fragment
+        android:id="@+id/movieDetailsFragment"
+        android:name="com.abdelrahman.moviesapp.presentation.fragments.movie_details.MovieDetailsFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_movie_details">
+
+    </fragment>
+
 
 </navigation>
