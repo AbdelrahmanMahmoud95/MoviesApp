@@ -13,9 +13,9 @@ import dagger.hilt.android.scopes.FragmentScoped
 import javax.inject.Inject
 
 @FragmentScoped
-class MovieAdapter @Inject constructor() :
-    RecyclerView.Adapter<MovieAdapter.NewsViewHolder>() {
-    var isBookmark: Boolean = false
+class MovieAdapter @Inject constructor(
+) :
+    RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     private val callback = object : DiffUtil.ItemCallback<Results>() {
         override fun areItemsTheSame(oldItem: Results, newItem: Results): Boolean {
             return oldItem.id == newItem.id
@@ -29,15 +29,13 @@ class MovieAdapter @Inject constructor() :
 
     val differ = AsyncListDiffer(this, callback)
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val binding = ItemMovieBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
-        return NewsViewHolder(binding)
+        return MovieViewHolder(binding)
     }
 
-
-    override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val article = differ.currentList[position]
 
         holder.bind(article)
@@ -48,7 +46,7 @@ class MovieAdapter @Inject constructor() :
         return differ.currentList.size
     }
 
-    inner class NewsViewHolder(
+    inner class MovieViewHolder(
         private val binding: ItemMovieBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(results: Results) {
@@ -60,7 +58,7 @@ class MovieAdapter @Inject constructor() :
 
             binding.root.setOnClickListener {
                 onItemClick?.let {
-                    it(results)
+                    it(results.id)
                 }
             }
 
@@ -75,6 +73,8 @@ class MovieAdapter @Inject constructor() :
 
     private var onBookmarkClick: ((Results) -> Unit)? = null
 
-    private var onItemClick: ((Results) -> Unit)? = null
-
+    private var onItemClick: ((Int) -> Unit)? = null
+    fun setOnItemClickListener(listener: (Int) -> Unit) {
+        onItemClick = listener
+    }
 }

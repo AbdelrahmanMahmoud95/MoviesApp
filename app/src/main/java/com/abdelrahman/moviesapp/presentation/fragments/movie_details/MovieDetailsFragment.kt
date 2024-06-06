@@ -4,37 +4,40 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.abdelrahman.moviesapp.R
-import com.abdelrahman.moviesapp.databinding.FragmentMoviesBinding
+import com.abdelrahman.moviesapp.databinding.FragmentMovieDetailsBinding
 import com.abdelrahman.moviesapp.presentation.base.BaseFragment
-import com.abdelrahman.moviesapp.presentation.fragments.movies.MovieAdapter
+import com.abdelrahman.moviesapp.utils.Constants
+import com.bumptech.glide.Glide
 
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class MovieDetailsFragment : BaseFragment<FragmentMoviesBinding>(FragmentMoviesBinding::inflate) {
+class MovieDetailsFragment : BaseFragment<FragmentMovieDetailsBinding>(FragmentMovieDetailsBinding::inflate) {
     override val viewModel: MovieDetailsViewModel by viewModels()
 
-    @Inject
-    lateinit var movieAdapter: MovieAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.initRequests(detailId)
+
         collectFlows(
             listOf(
-                ::collectNowPlayingMovies,
+                ::collectDetails,
                 ::collectUiState
-
             )
         )
 
-        binding.nowPlayingMoviesRecyclerView.adapter = movieAdapter
-
     }
 
-    private suspend fun collectNowPlayingMovies() {
-        viewModel.nowPlayingMovies.collect { nowPlayingMovies ->
-            movieAdapter.differ.submitList(nowPlayingMovies)
+    private suspend fun collectDetails() {
+        viewModel.details.collect { details ->
+            Glide.with(binding.movieBannerImageView.context).load(Constants.IMAGE_URL + details.posterPath)
+                .into(binding.movieBannerImageView)
+            binding.movieDateTextView.text = details.releaseDate
+            binding.movieTitleTextView.text = details.title
+            binding.movieDescriptionTextView.text = details.overview
+            binding.movieRatingTextView.text = details.voteAverage.toString()
+            binding.movieLanguageTextView.text = details.language
         }
     }
 
@@ -46,7 +49,7 @@ class MovieDetailsFragment : BaseFragment<FragmentMoviesBinding>(FragmentMoviesB
                 anchor = true
             ) {
                 viewModel.retryConnection {
-                    viewModel.initRequests()
+                    viewModel.initRequests(detailId)
                 }
             }
         }

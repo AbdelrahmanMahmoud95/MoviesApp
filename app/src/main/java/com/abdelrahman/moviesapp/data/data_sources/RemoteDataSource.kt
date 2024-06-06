@@ -6,6 +6,6 @@ import com.abdelrahman.moviesapp.data.models.Results
 
 interface RemoteDataSource {
     suspend fun getNowPlayingMovies(): MoviesResponse
-    suspend fun getMovieDetails(movieID: String): Results
+    suspend fun getMovieDetails(movieID: Int): Results
 
 }
