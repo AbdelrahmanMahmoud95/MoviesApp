@@ -9,7 +9,7 @@
         android:id="@+id/moviesFragment"
         android:name="com.abdelrahman.moviesapp.presentation.fragments.movies.MoviesFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_movies" >
+        tools:layout="@layout/fragment_movies">
 
     </fragment>
 

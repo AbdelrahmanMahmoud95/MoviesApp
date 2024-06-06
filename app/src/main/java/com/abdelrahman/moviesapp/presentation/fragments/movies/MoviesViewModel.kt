@@ -57,7 +57,7 @@ class MoviesViewModel @Inject constructor(
         }
     }
 
-    private fun initRequests() {
+    internal fun initRequests() {
         viewModelScope.launch {
             coroutineScope {
                 launch {

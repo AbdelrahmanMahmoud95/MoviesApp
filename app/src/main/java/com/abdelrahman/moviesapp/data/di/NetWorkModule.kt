@@ -6,25 +6,26 @@ import android.net.NetworkCapabilities
 import android.net.NetworkInfo
 import android.os.Build
 import com.abdelrahman.moviesapp.data.network.MovieApiServices
-import com.abdelrahman.moviesapp.utils.Constants
+import com.abdelrahman.moviesapp.utils.Constants.API_KEY
+import com.abdelrahman.moviesapp.utils.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object NetWorkModule {
+object NetworkModule {
     private const val QUERY_LANGUAGE = "en"
     private const val IMAGE_LANGUAGE = "en,null"
+
     private const val CACHE_SIZE = 1024 * 1024 * 10L // 10 MB
     private const val CACHE_MAX_AGE = 60 * 60  // 1 hour
     private const val CACHE_MAX_STALE = 60 * 60 * 24 * 7 // 7 days
@@ -50,14 +51,15 @@ object NetWorkModule {
             return activeNetwork != null && activeNetwork.isConnected
         }
     }
+
     @Singleton
     @Provides
     fun provideInterceptor(@ApplicationContext context: Context): Interceptor =
         Interceptor { chain ->
             val url = chain.request()
-                .url
+                .url()
                 .newBuilder()
-                .addQueryParameter("api_key", Constants.API_KEY)
+                .addQueryParameter("api_key", API_KEY)
                 .addQueryParameter("language", QUERY_LANGUAGE)
                 .addQueryParameter("include_image_language", IMAGE_LANGUAGE)
                 .build()
@@ -76,37 +78,25 @@ object NetWorkModule {
             chain.proceed(request)
         }
 
-
     @Singleton
     @Provides
-    fun provideHttpLoggingInterceptor():HttpLoggingInterceptor{
-      return  HttpLoggingInterceptor().apply {
-            this.level=HttpLoggingInterceptor.Level.BODY
-        }
-    }
-
-    @Singleton
-    @Provides
-    fun provideOkHTTPClint(interceptor:HttpLoggingInterceptor):OkHttpClient{
-       return OkHttpClient.Builder().apply {
-            this.addInterceptor(interceptor)
-            this.connectTimeout(30, TimeUnit.SECONDS)
-            this.readTimeout(20, TimeUnit.SECONDS)
-            this.writeTimeout(25, TimeUnit.SECONDS)
-        }.build()
-    }
-    @Singleton
-    @Provides
-    fun provideRetrofit(client: OkHttpClient): Retrofit {
-        return Retrofit.Builder().baseUrl(Constants.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(client)
+    fun provideOkHttpClient(@ApplicationContext context: Context,interceptor: Interceptor): OkHttpClient =
+        OkHttpClient.Builder()
+            .cache(Cache(context.cacheDir, CACHE_SIZE))
+            .addInterceptor(interceptor)
             .build()
-    }
 
     @Singleton
     @Provides
-    fun provideApiServices(retrofit: Retrofit): MovieApiServices {
-        return retrofit.create(MovieApiServices::class.java)
-    }
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
+        Retrofit.Builder()
+            .client(okHttpClient)
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+    @Singleton
+    @Provides
+    fun provideMovieApi(retrofit: Retrofit): MovieApiServices = retrofit.create(MovieApiServices::class.java)
+
 }
