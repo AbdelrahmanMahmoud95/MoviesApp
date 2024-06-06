@@ -1,8 +1,7 @@
-package com.abdelrahman.moviesapp
+package com.abdelrahman.moviesapp.presentation.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.NavHostFragment
 import com.abdelrahman.moviesapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
