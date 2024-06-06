@@ -7,6 +7,7 @@ import javax.inject.Inject
 class RemoteDataSourceImpl @Inject constructor(
     private val apiServices: ApiServices
 ) : RemoteDataSource {
-
+    override suspend fun getNowPlayingMovies() = apiServices.getNowPlayingMovies()
+    override suspend fun getMovie(movieID: String) = apiServices.getMovieDetails(movieID = movieID)
 
 }
