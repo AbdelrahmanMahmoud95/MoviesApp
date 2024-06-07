@@ -16,7 +16,7 @@
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/backTextView"
@@ -24,14 +24,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="10dp"
+            android:drawableStart="@drawable/back_arrow"
+            android:drawablePadding="6dp"
             android:text="@string/back"
             android:textColor="@color/white"
             android:textSize="16sp"
-            android:drawablePadding="6dp"
-            android:drawableStart="@drawable/back_arrow"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/movieTitleTextView"
             android:layout_width="0dp"
@@ -41,6 +42,7 @@
             android:layout_marginEnd="6dp"
             android:ellipsize="end"
             android:maxLines="2"
+            android:textAlignment="viewStart"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -65,6 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:lines="1"
+            android:maxLength="3"
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@+id/movieTitleTextView"

@@ -42,8 +42,7 @@ class MovieDetailsFragment :
             binding.movieDateTextView.text = details.releaseDate
             binding.movieTitleTextView.text = details.title
             binding.movieDescriptionTextView.text = details.overview
-            binding.movieRatingTextView.text =
-                String.format("%.1f", details.voteAverage).toDouble().toString()
+            binding.movieRatingTextView.text = details.voteAverage.toString()
             binding.movieLanguageTextView.text = "Language: " + details.language
         }
     }

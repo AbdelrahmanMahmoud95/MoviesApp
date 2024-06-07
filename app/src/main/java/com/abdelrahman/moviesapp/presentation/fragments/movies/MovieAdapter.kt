@@ -44,12 +44,15 @@ class MovieAdapter @Inject constructor() : RecyclerView.Adapter<MovieAdapter.Mov
         return differ.currentList.size
     }
 
-    inner class MovieViewHolder(private val binding: ItemMovieBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class MovieViewHolder(private val binding: ItemMovieBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(results: Results) {
             binding.movieDateTextView.text = results.releaseDate
             binding.movieTitleTextView.text = results.title
-            binding.movieRatingTextView.text = String.format("%.1f", results.voteAverage).toDouble().toString()
-            Glide.with(binding.movieImageView.context).load(IMAGE_URL + results.posterPath).into(binding.movieImageView)
+            binding.movieRatingTextView.text = results.voteAverage.toString()
+
+            Glide.with(binding.movieImageView.context).load(IMAGE_URL + results.posterPath)
+                .into(binding.movieImageView)
 
             updateFavoriteIcon(results.id)
 
