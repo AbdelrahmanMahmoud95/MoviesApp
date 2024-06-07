@@ -26,7 +26,7 @@ class MoviesRepositoryImpl
         remoteDataSource.getMovieDetails(movieID)
     }
 
-    override fun getFavoriteMovies(): Flow<List<FavoriteMovieEntity>> {
+    override fun getFavoriteMovies(): List<FavoriteMovieEntity> {
        return localDataSource.getFavoriteMovies()
     }
 

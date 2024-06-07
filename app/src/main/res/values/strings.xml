@@ -4,5 +4,6 @@
     <string name="error_service">API service is not responding at the moment, please try again later.</string>
     <string name="error_unknown">Unknown error occurred.</string>
     <string name="button_retry">RETRY</string>
-
+    <string name="snackbar_removed_item">Removed from favorites</string>
+    <string name="snackbar_action_undo">UNDO</string>
 </resources>

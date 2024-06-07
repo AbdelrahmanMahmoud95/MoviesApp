@@ -2,13 +2,12 @@ package com.abdelrahman.moviesapp.data.data_sources
 
 import com.abdelrahman.moviesapp.data.local.dao.MovieDao
 import com.abdelrahman.moviesapp.data.local.entity.FavoriteMovieEntity
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class LocalDataSourceImpl @Inject constructor(private val movieDao : MovieDao) : LocalDataSource {
 
 
-    override fun getFavoriteMovies(): Flow<List<FavoriteMovieEntity>> {
+    override fun getFavoriteMovies(): List<FavoriteMovieEntity> {
         return  movieDao.getAllMovies()
     }
 

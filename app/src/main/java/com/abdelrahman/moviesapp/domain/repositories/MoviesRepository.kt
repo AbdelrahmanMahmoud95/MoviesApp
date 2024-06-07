@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 interface MoviesRepository {
     suspend fun getNowPlayingMovies(): Resource<MoviesResponse>
     suspend fun getMovieDetails(movieID: Int): Resource<Results>
-    fun getFavoriteMovies(): Flow<List<FavoriteMovieEntity>>
+    fun getFavoriteMovies(): List<FavoriteMovieEntity>
     fun movieExists(movieId: Int): Boolean
     fun insertMovie(movie: FavoriteMovieEntity)
     fun deleteMovie(movie: FavoriteMovieEntity)

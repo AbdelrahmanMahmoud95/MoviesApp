@@ -9,7 +9,7 @@ import javax.inject.Inject
 class DeleteFavoriteUseCase @Inject constructor(
     private val movieRepository: MoviesRepository,
 ) {
-    suspend operator fun invoke(
+     operator fun invoke(
         movie: FavoriteMovieEntity? = null,
     ) {
         try {

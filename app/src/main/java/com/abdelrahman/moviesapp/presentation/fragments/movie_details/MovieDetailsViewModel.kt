@@ -31,12 +31,14 @@ class MovieDetailsViewModel @Inject constructor(
     val isInFavorites get() = _isInFavorites.asStateFlow()
 
     private lateinit var favoriteMovie: FavoriteMovieEntity
+    private var id: Int =0
 
     private fun fetchMovieDetails() {
         viewModelScope.launch {
             getMovieDetailsUseCase(detailId).collect { response ->
                 when (response) {
                     is Resource.Success -> {
+                        id = response.data.id
                         (response.data).apply {
                             _details.value = this
                             favoriteMovie = FavoriteMovieEntity(

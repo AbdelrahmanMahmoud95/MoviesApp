@@ -21,17 +21,7 @@ class MovieDetailsFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.initRequests(detailId)
-
-        binding.favoriteImageView.setOnClickListener {
-            viewModel.updateFavorites()
-            if (viewModel.isInFavorites.value){
-                binding.favoriteImageView.setImageResource(R.drawable.favorite_selected)
-            }
-            else{
-                binding.favoriteImageView.setImageResource(R.drawable.favorite_unselected)
-            }
-        }
-
+        checkFavorite()
         collectFlows(
             listOf(
                 ::collectDetails,
@@ -54,6 +44,24 @@ class MovieDetailsFragment :
                 String.format("%.1f", details.voteAverage).toDouble().toString()
             binding.movieLanguageTextView.text = "Language: " + details.language
         }
+    }
+
+    private fun checkFavorite() {
+        if (viewModel.isInFavorites.value) {
+            binding.favoriteImageView.setImageResource(R.drawable.favorite_selected)
+        } else {
+            binding.favoriteImageView.setImageResource(R.drawable.favorite_unselected)
+        }
+
+        binding.favoriteImageView.setOnClickListener {
+            viewModel.updateFavorites()
+            if (viewModel.isInFavorites.value) {
+                binding.favoriteImageView.setImageResource(R.drawable.favorite_selected)
+            } else {
+                binding.favoriteImageView.setImageResource(R.drawable.favorite_unselected)
+            }
+        }
+
     }
 
     private suspend fun collectUiState() {
