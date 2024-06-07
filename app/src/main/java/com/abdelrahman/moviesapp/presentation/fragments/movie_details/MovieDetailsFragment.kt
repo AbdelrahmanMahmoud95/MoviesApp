@@ -21,6 +21,9 @@ class MovieDetailsFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.initRequests(detailId)
+        binding.backTextView.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
         checkFavorite()
         collectFlows(
             listOf(
@@ -28,7 +31,6 @@ class MovieDetailsFragment :
                 ::collectUiState
             )
         )
-
     }
 
     @SuppressLint("SetTextI18n")
