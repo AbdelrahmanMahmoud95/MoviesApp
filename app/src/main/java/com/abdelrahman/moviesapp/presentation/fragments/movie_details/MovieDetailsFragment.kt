@@ -22,6 +22,16 @@ class MovieDetailsFragment :
         super.onViewCreated(view, savedInstanceState)
         viewModel.initRequests(detailId)
 
+        binding.favoriteImageView.setOnClickListener {
+            viewModel.updateFavorites()
+            if (viewModel.isInFavorites.value){
+                binding.favoriteImageView.setImageResource(R.drawable.favorite_selected)
+            }
+            else{
+                binding.favoriteImageView.setImageResource(R.drawable.favorite_unselected)
+            }
+        }
+
         collectFlows(
             listOf(
                 ::collectDetails,

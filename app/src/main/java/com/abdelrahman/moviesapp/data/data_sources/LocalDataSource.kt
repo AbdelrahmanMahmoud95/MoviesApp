@@ -1,11 +1,12 @@
 package com.abdelrahman.moviesapp.data.data_sources
 
 import com.abdelrahman.moviesapp.data.local.entity.FavoriteMovieEntity
+import kotlinx.coroutines.flow.Flow
 
 
 interface LocalDataSource {
-    suspend fun getFavoriteMovies(): List<FavoriteMovieEntity>
-    suspend fun movieExists(movieId: Int): Boolean
-    suspend fun insertMovie(movie: FavoriteMovieEntity)
-    suspend fun deleteMovie(movie: FavoriteMovieEntity)
+    fun getFavoriteMovies(): Flow<List<FavoriteMovieEntity>>
+    fun movieExists(movieId: Int): Boolean
+    fun insertMovie(movie: FavoriteMovieEntity)
+    fun deleteMovie(movie: FavoriteMovieEntity)
 }

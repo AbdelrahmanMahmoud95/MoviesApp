@@ -25,6 +25,6 @@ object DatabaseModule {
         Room.databaseBuilder(
             context,
             AppDatabase::class.java,
-            "movies_db"
-        ).build()
+            "movies_app_db"
+        ).allowMainThreadQueries().build()
 }

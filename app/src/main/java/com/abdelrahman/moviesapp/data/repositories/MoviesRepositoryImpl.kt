@@ -8,6 +8,7 @@ import com.abdelrahman.moviesapp.data.models.Results
 import com.abdelrahman.moviesapp.domain.repositories.MoviesRepository
 import com.abdelrahman.moviesapp.utils.Resource
 import com.abdelrahman.moviesapp.utils.SafeApiCall
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class MoviesRepositoryImpl
@@ -25,19 +26,19 @@ class MoviesRepositoryImpl
         remoteDataSource.getMovieDetails(movieID)
     }
 
-    override suspend fun getFavoriteMovies(): List<FavoriteMovieEntity> {
+    override fun getFavoriteMovies(): Flow<List<FavoriteMovieEntity>> {
        return localDataSource.getFavoriteMovies()
     }
 
-    override suspend fun movieExists(movieId: Int): Boolean {
+    override fun movieExists(movieId: Int): Boolean {
        return localDataSource.movieExists(movieId)
     }
 
-    override suspend fun insertMovie(movie: FavoriteMovieEntity) {
+    override fun insertMovie(movie: FavoriteMovieEntity) {
         localDataSource.insertMovie(movie)
     }
 
-    override suspend fun deleteMovie(movie: FavoriteMovieEntity) {
+    override fun deleteMovie(movie: FavoriteMovieEntity) {
         localDataSource.deleteMovie(movie)
     }
 

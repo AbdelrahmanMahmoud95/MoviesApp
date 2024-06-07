@@ -2,14 +2,14 @@ package com.abdelrahman.moviesapp.domain.use_cases
 
 import com.abdelrahman.moviesapp.domain.repositories.MoviesRepository
 import com.bumptech.glide.load.HttpException
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class GetFavorites @Inject constructor(
+class GetFavoritesUseCase @Inject constructor(
     private val movieRepository: MoviesRepository
 ) {
-    operator fun invoke(): Flow<List<Any>> = flow {
+    operator fun invoke(
+    ) = flow {
         emit(
             try {
                 movieRepository.getFavoriteMovies()
@@ -18,4 +18,5 @@ class GetFavorites @Inject constructor(
             }
         )
     }
+
 }
