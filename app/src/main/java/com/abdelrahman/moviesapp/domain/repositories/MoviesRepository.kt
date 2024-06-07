@@ -4,7 +4,6 @@ import com.abdelrahman.moviesapp.data.local.entity.FavoriteMovieEntity
 import com.abdelrahman.moviesapp.data.models.MoviesResponse
 import com.abdelrahman.moviesapp.data.models.Results
 import com.abdelrahman.moviesapp.utils.Resource
-import kotlinx.coroutines.flow.Flow
 
 
 interface MoviesRepository {

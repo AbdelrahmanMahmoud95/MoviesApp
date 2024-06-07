@@ -6,4 +6,5 @@
     <string name="button_retry">RETRY</string>
     <string name="snackbar_removed_item">Removed from favorites</string>
     <string name="snackbar_action_undo">UNDO</string>
+    <string name="back">Back</string>
 </resources>

@@ -6,7 +6,7 @@ import com.abdelrahman.moviesapp.data.local.entity.FavoriteMovieEntity
 @Dao
 interface MovieDao {
 
-    @Query("SELECT * FROM favorite ORDER BY release_date DESC")
+    @Query("SELECT * FROM favorite")
     fun getAllMovies(): List<FavoriteMovieEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

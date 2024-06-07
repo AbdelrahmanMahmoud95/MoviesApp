@@ -16,9 +16,22 @@
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@color/black" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
+        <TextView
+            android:id="@+id/backTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/back"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:drawablePadding="6dp"
+            android:drawableStart="@drawable/back_arrow"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <TextView
             android:id="@+id/movieTitleTextView"
             android:layout_width="0dp"
@@ -27,10 +40,10 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="6dp"
             android:ellipsize="end"
-            android:textStyle="bold"
             android:maxLines="2"
             android:textColor="@color/black"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/favoriteImageView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/movieBannerImageView"

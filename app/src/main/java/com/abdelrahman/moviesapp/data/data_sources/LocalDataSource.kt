@@ -1,7 +1,6 @@
 package com.abdelrahman.moviesapp.data.data_sources
 
 import com.abdelrahman.moviesapp.data.local.entity.FavoriteMovieEntity
-import kotlinx.coroutines.flow.Flow
 
 
 interface LocalDataSource {

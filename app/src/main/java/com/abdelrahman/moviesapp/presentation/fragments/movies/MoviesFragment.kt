@@ -1,5 +1,4 @@
 package com.abdelrahman.moviesapp.presentation.fragments.movies
-
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -8,10 +7,8 @@ import com.abdelrahman.moviesapp.data.local.entity.FavoriteMovieEntity
 import com.abdelrahman.moviesapp.databinding.FragmentMoviesBinding
 import com.abdelrahman.moviesapp.presentation.base.BaseFragment
 import com.abdelrahman.moviesapp.utils.navigate
-
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class MoviesFragment : BaseFragment<FragmentMoviesBinding>(FragmentMoviesBinding::inflate) {
@@ -19,13 +16,14 @@ class MoviesFragment : BaseFragment<FragmentMoviesBinding>(FragmentMoviesBinding
 
     @Inject
     lateinit var movieAdapter: MovieAdapter
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         collectFlows(
             listOf(
                 ::collectNowPlayingMovies,
-                ::collectUiState
-
+                ::collectUiState,
+                ::collectFavoriteMovies
             )
         )
 
@@ -34,13 +32,23 @@ class MoviesFragment : BaseFragment<FragmentMoviesBinding>(FragmentMoviesBinding
         movieAdapter.setOnItemClickListener {
             navigate(
                 R.id.moviesFragment,
-                MoviesFragmentDirections.actionMoviesFragmentToMovieDetailsFragment(
-                    it
-                )
+                MoviesFragmentDirections.actionMoviesFragmentToMovieDetailsFragment(it)
             )
         }
-        movieAdapter.setOnAddToFavoriteClickListener {
 
+        movieAdapter.setOnAddToFavoriteClickListener { movieId ->
+            val isFavorite = viewModel.favoriteMovies.value.any { it.id == movieId }
+            if (isFavorite) {
+                removeMovie(FavoriteMovieEntity(id = movieId))
+            } else {
+                addMovie(FavoriteMovieEntity(id = movieId))
+            }
+        }
+    }
+
+    private suspend fun collectFavoriteMovies() {
+        viewModel.favoriteMovies.collect { favoriteMovies ->
+            movieAdapter.setFavoriteMovies(favoriteMovies.map { it.id })
         }
     }
 
@@ -49,7 +57,6 @@ class MoviesFragment : BaseFragment<FragmentMoviesBinding>(FragmentMoviesBinding
             movieAdapter.differ.submitList(nowPlayingMovies)
         }
     }
-
 
     private suspend fun collectUiState() {
         viewModel.uiState.collect { state ->
@@ -72,19 +79,11 @@ class MoviesFragment : BaseFragment<FragmentMoviesBinding>(FragmentMoviesBinding
 
     private fun removeMovie(movie: FavoriteMovieEntity) {
         viewModel.removeMovieFromFavorites(movie)
-        showSnackbar(
-            message = getString(R.string.snackbar_removed_item),
-            actionText = getString(R.string.snackbar_action_undo),
-            anchor = true
-        ) {
-            viewModel.addMovieToFavorites(movie)
-        }
     }
 
-    private suspend fun collectFavoriteMovies() {
-        viewModel.favoriteMovies.collect { favoriteMovies ->
-            //adapterFavorites.submitList(favoriteMovies)
-        }
+    private fun addMovie(movie: FavoriteMovieEntity) {
+        viewModel.addMovieToFavorites(movie)
     }
-
 }
+
+
