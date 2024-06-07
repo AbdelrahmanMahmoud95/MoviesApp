@@ -28,7 +28,7 @@ abstract class BaseFragment<VB : ViewBinding>(
 
     abstract val viewModel: BaseViewModel?
 
-    protected var mediator: TabLayoutMediator? = null
+    private var mediator: TabLayoutMediator? = null
 
     private var snackbar: Snackbar? = null
 

@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.abdelrahman.moviesapp.R
+import com.abdelrahman.moviesapp.data.local.entity.FavoriteMovieEntity
 import com.abdelrahman.moviesapp.data.models.Results
 import com.abdelrahman.moviesapp.databinding.ItemMovieBinding
 import com.abdelrahman.moviesapp.utils.Constants.IMAGE_URL
@@ -36,9 +38,9 @@ class MovieAdapter @Inject constructor(
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        val article = differ.currentList[position]
+        val movie = differ.currentList[position]
 
-        holder.bind(article)
+        holder.bind(movie)
 
     }
 
@@ -52,7 +54,8 @@ class MovieAdapter @Inject constructor(
         fun bind(results: Results) {
             binding.movieDateTextView.text = results.releaseDate
             binding.movieTitleTextView.text = results.title
-            binding.movieRatingTextView.text =  String.format("%.1f", results.voteAverage).toDouble().toString()
+            binding.movieRatingTextView.text =
+                String.format("%.1f", results.voteAverage).toDouble().toString()
             Glide.with(binding.movieImageView.context).load(IMAGE_URL + results.posterPath)
                 .into(binding.movieImageView)
 
@@ -63,18 +66,22 @@ class MovieAdapter @Inject constructor(
             }
 
             binding.favoriteImageView.setOnClickListener {
-                onBookmarkClick?.let {
-                    it(results)
+                onAddToFavorite?.let {
+                    it(results.id)
                 }
             }
         }
 
     }
 
-    private var onBookmarkClick: ((Results) -> Unit)? = null
+    private var onAddToFavorite: ((Int) -> Unit)? = null
 
     private var onItemClick: ((Int) -> Unit)? = null
     fun setOnItemClickListener(listener: (Int) -> Unit) {
         onItemClick = listener
+    }
+
+    fun  setOnAddToFavoriteClickListener(listener: (Int) -> Unit) {
+        onAddToFavorite = listener
     }
 }

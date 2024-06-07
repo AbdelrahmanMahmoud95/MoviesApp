@@ -72,6 +72,15 @@ dependencies {
     implementation "com.google.dagger:hilt-android:2.48"
     kapt "com.google.dagger:hilt-compiler:2.48"
 
+
+    //Room
+    def room_version = '2.5.2'
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    //DataStore
+    implementation 'androidx.datastore:datastore-preferences:1.0.0'
+
     //Kotlin Coroutines
     def coroutines_android_version = '1.3.7'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_android_version"
@@ -81,7 +90,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.2'
     implementation 'androidx.lifecycle:lifecycle-common-java8:2.6.2'
-
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
     //Glide

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.abdelrahman.moviesapp.R
+import com.abdelrahman.moviesapp.data.local.entity.FavoriteMovieEntity
 import com.abdelrahman.moviesapp.databinding.FragmentMoviesBinding
 import com.abdelrahman.moviesapp.presentation.base.BaseFragment
 import com.abdelrahman.moviesapp.utils.navigate
@@ -38,6 +39,9 @@ class MoviesFragment : BaseFragment<FragmentMoviesBinding>(FragmentMoviesBinding
                 )
             )
         }
+        movieAdapter.setOnAddToFavoriteClickListener {
+
+        }
     }
 
     private suspend fun collectNowPlayingMovies() {
@@ -60,4 +64,27 @@ class MoviesFragment : BaseFragment<FragmentMoviesBinding>(FragmentMoviesBinding
             }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.fetchFavoriteMovies()
+    }
+
+    private fun removeMovie(movie: FavoriteMovieEntity) {
+        viewModel.removeMovieFromFavorites(movie)
+        showSnackbar(
+            message = getString(R.string.snackbar_removed_item),
+            actionText = getString(R.string.snackbar_action_undo),
+            anchor = true
+        ) {
+            viewModel.addMovieToFavorites(movie)
+        }
+    }
+
+    private suspend fun collectFavoriteMovies() {
+        viewModel.favoriteMovies.collect { favoriteMovies ->
+            //adapterFavorites.submitList(favoriteMovies)
+        }
+    }
+
 }
