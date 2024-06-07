@@ -13,14 +13,12 @@ data class FavoriteMovieEntity(
     val posterPath: String?,
     @ColumnInfo(name = "release_date")
     val releaseDate: String?,
-    @ColumnInfo(name = "runtime")
-    val runtime: Int?,
     @ColumnInfo(name = "title")
     val title: String,
     @ColumnInfo(name = "vote_average")
     val voteAverage: Double,
-    @ColumnInfo(name = "vote_count")
-    val voteCount: Int,
-    @ColumnInfo(name = "date_added")
-    val date: Long
+    @ColumnInfo(name ="original_language")
+    val language: String,
+    @ColumnInfo(name ="overview")
+    val overview: String,
 )

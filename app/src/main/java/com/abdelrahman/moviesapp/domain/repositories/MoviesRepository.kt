@@ -1,7 +1,6 @@
 package com.abdelrahman.moviesapp.domain.repositories
 
 import com.abdelrahman.moviesapp.data.local.entity.FavoriteMovieEntity
-import com.abdelrahman.moviesapp.data.models.FavoriteMovie
 import com.abdelrahman.moviesapp.data.models.MoviesResponse
 import com.abdelrahman.moviesapp.data.models.Results
 import com.abdelrahman.moviesapp.utils.Resource

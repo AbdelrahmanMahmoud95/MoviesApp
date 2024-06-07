@@ -17,8 +17,6 @@ data class Results(
     @SerializedName("vote_average") val voteAverage: Double,
     @SerializedName("vote_count") val voteCount: Int
 ) {
-
-
     companion object {
         val empty = Results(
             id = 0,
@@ -29,9 +27,8 @@ data class Results(
             language = "",
             voteAverage = 0.0,
             voteCount = 0,
-            popularity = 0.0,
-
-            )
+            popularity = 0.0
+        )
     }
 }
 
