@@ -1,10 +1,8 @@
 package com.abdelrahman.moviesapp.presentation.fragments.movies
 
 import androidx.lifecycle.viewModelScope
-import com.abdelrahman.moviesapp.data.models.MoviesResponse
 import com.abdelrahman.moviesapp.data.models.Results
 import com.abdelrahman.moviesapp.domain.use_cases.GetMoviesListUseCase
-import com.abdelrahman.moviesapp.presentation.UiState
 import com.abdelrahman.moviesapp.presentation.base.BaseViewModel
 import com.abdelrahman.moviesapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,7 +10,6 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @HiltViewModel
@@ -43,17 +40,6 @@ class MoviesViewModel @Inject constructor(
                     areResponsesSuccessful.add(false)
                 }
             }
-        }
-    }
-
-
-    fun getNowPlayingMovies() {
-        _uiState.value = UiState.loadingState(isInitial)
-        _nowPlayingMovies.value = emptyList()
-
-        viewModelScope.launch {
-            coroutineScope { fetchMoviesList() }
-            setUiState()
         }
     }
 

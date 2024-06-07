@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import com.abdelrahman.moviesapp.R
 import com.abdelrahman.moviesapp.databinding.FragmentMoviesBinding
 import com.abdelrahman.moviesapp.presentation.base.BaseFragment
+import com.abdelrahman.moviesapp.utils.navigate
 
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -29,6 +30,14 @@ class MoviesFragment : BaseFragment<FragmentMoviesBinding>(FragmentMoviesBinding
 
         binding.nowPlayingMoviesRecyclerView.adapter = movieAdapter
 
+        movieAdapter.setOnItemClickListener {
+            navigate(
+                R.id.moviesFragment,
+                MoviesFragmentDirections.actionMoviesFragmentToMovieDetailsFragment(
+                    it
+                )
+            )
+        }
     }
 
     private suspend fun collectNowPlayingMovies() {
@@ -36,6 +45,7 @@ class MoviesFragment : BaseFragment<FragmentMoviesBinding>(FragmentMoviesBinding
             movieAdapter.differ.submitList(nowPlayingMovies)
         }
     }
+
 
     private suspend fun collectUiState() {
         viewModel.uiState.collect { state ->

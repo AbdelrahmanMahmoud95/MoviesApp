@@ -18,7 +18,7 @@ class MoviesRepositoryImpl
         remoteDataSource.getNowPlayingMovies()
     }
 
-    override suspend fun getMovieDetails(movieID: String): Resource<Results> = safeApiCall.execute {
+    override suspend fun getMovieDetails(movieID: Int): Resource<Results> = safeApiCall.execute {
         remoteDataSource.getMovieDetails(movieID)
     }
 

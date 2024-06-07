@@ -7,6 +7,6 @@ import com.abdelrahman.moviesapp.utils.Resource
 
 interface MoviesRepository {
     suspend fun getNowPlayingMovies(): Resource<MoviesResponse>
-    suspend fun getMovieDetails(movieID: String): Resource<Results>
+    suspend fun getMovieDetails(movieID: Int): Resource<Results>
 
 }

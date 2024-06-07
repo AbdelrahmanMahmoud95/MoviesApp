@@ -11,7 +11,7 @@ interface MovieApiServices {
 
     @GET("movie/{movieID}")
     suspend fun getMovieDetails(
-        @Path("movieID") movieID: String
+        @Path("movieID") movieID: Int
     ): Results
 
 

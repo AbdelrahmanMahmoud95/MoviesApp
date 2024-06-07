@@ -3,6 +3,10 @@ package com.abdelrahman.moviesapp.utils
 import android.content.Context
 import android.text.format.DateUtils
 import android.widget.Toast
+import androidx.annotation.IdRes
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -24,4 +28,7 @@ fun String.convertDateFormate(format: String = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"): 
 fun Context.showToast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 }
-
+fun Fragment.navigate(@IdRes currentDestinationId: Int, navDirections: NavDirections) {
+    if (findNavController().currentDestination?.id == currentDestinationId)
+        findNavController().navigate(navDirections)
+}
