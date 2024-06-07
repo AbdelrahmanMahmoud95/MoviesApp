@@ -52,7 +52,7 @@ class MovieAdapter @Inject constructor(
         fun bind(results: Results) {
             binding.movieDateTextView.text = results.releaseDate
             binding.movieTitleTextView.text = results.title
-            binding.movieRatingTextView.text = results.voteAverage.toString()
+            binding.movieRatingTextView.text =  String.format("%.1f", results.voteAverage).toDouble().toString()
             Glide.with(binding.movieImageView.context).load(IMAGE_URL + results.posterPath)
                 .into(binding.movieImageView)
 

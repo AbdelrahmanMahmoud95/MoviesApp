@@ -1,5 +1,6 @@
 package com.abdelrahman.moviesapp.presentation.fragments.movie_details
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -13,7 +14,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class MovieDetailsFragment : BaseFragment<FragmentMovieDetailsBinding>(FragmentMovieDetailsBinding::inflate) {
+class MovieDetailsFragment :
+    BaseFragment<FragmentMovieDetailsBinding>(FragmentMovieDetailsBinding::inflate) {
     override val viewModel: MovieDetailsViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -29,15 +31,18 @@ class MovieDetailsFragment : BaseFragment<FragmentMovieDetailsBinding>(FragmentM
 
     }
 
+    @SuppressLint("SetTextI18n")
     private suspend fun collectDetails() {
         viewModel.details.collect { details ->
-            Glide.with(binding.movieBannerImageView.context).load(Constants.IMAGE_URL + details.posterPath)
+            Glide.with(binding.movieBannerImageView.context)
+                .load(Constants.IMAGE_URL + details.posterPath)
                 .into(binding.movieBannerImageView)
             binding.movieDateTextView.text = details.releaseDate
             binding.movieTitleTextView.text = details.title
             binding.movieDescriptionTextView.text = details.overview
-            binding.movieRatingTextView.text = details.voteAverage.toString()
-            binding.movieLanguageTextView.text = details.language
+            binding.movieRatingTextView.text =
+                String.format("%.1f", details.voteAverage).toDouble().toString()
+            binding.movieLanguageTextView.text = "Language: " + details.language
         }
     }
 
