@@ -1,4 +1,5 @@
 <h1 align="center"> Movies App </h1>
+![movies_list](https://github.com/AbdelrahmanMahmoud95/MoviesApp/assets/31896269/8742a3ec-4d0c-4aec-a2dd-76164b58203b)
 
 ###  Project Features
 
